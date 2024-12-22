@@ -243,23 +243,8 @@ create_pager(3, 12, 10, page);
 ```
 
 ---
-### 12. 文字 (text)
 
-頁面用於分隔內容，分頁器用於切換頁面。
 
-#### 函式
-
-- `create_text(int x, int y, const char* text, Component* parent)`
-- `set_text(Component* text, const char* new_text)`
-
-#### 範例
-
-```c
-Component* text = create_text(3, 3, "Hello, World!", box);
-set_text(text, "New text");
-```
-
----
 以上為各元件的基本用法，具體細節請參考範例程式碼及函式庫內部實現。
 
 請注意以下幾點，這些特性可能比較不直觀：
@@ -280,5 +265,4 @@ clear 不只是清空畫面：它會清除所有元件並釋放其記憶體空�
 
 按鈕默認高度與樣式：按鈕默認高度為 3 格，並自帶框線。
 
-以下介紹各種元件的用法及範例程式碼。
 

@@ -338,7 +338,7 @@ Component* create_pager(int x, int y, int width, Component* parent){
     pager->width = width;
     pager->type = PAGER;
     pager->draw = draw_pager;
-
+    pager->level = parent->level + 3; // 這樣才會在子頁上面
     parent->children[1] = pager;
     add_to_trash(pager);
     update_screen_component();
@@ -356,7 +356,7 @@ void add_radio_button(Component *radio_button, char *text)
     radio_button_data->radio_button_count++;
     radio_button->height = radio_button_data->radio_button_count;
     update_screen_component();
-    radio_button->draw(radio_button);
+
 }
 
 void add_dropdown_menu(Component *dropdown_menu, char *text)
@@ -376,7 +376,7 @@ void set_component_format(Component *component, int format)
 {
     component->color_format = format;
     update_screen_component();
-    component->draw(component);
+
 }
 
 void set_text(Component *component, char *text)
@@ -392,14 +392,14 @@ void set_text(Component *component, char *text)
     component->data = text_data;
     add_to_trash(text_data);
     update_screen_component();
-    component->draw(component);
+
 }
 
 void set_corner(Component *component, int round_corner)
 {
     component->round_corner = round_corner;
     update_screen_component();
-    component->draw(component);
+
 }
 
 void page_to(Component* page, int index){
@@ -464,6 +464,15 @@ int get_button_click(Component *button)
 
 
     return is_clicked;
+}
+
+int get_checkbox_checked(Component *checkbox)
+{
+    if (checkbox->type != CHECKBOX)
+    {
+        return 0;
+    }
+    return ((Checkbox_data *)checkbox->data)->is_checked;
 }
 
 char *get_input_field_input(Component *textComponent)

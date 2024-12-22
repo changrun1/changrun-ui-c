@@ -145,6 +145,7 @@ void expand_dropdown_menu(Component* dropdown_menu);
 void collapse_dropdown_menu(Component* dropdown_menu);
 
 int get_button_click(Component* button);
+int get_checkbox_checked(Component* checkbox);
 char* get_input_field_input(Component* textComponent);
 
 

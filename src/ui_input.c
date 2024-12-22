@@ -90,7 +90,6 @@ void update_input()
             Component *component = get_component_by_position(y, x);
             if (component != NULL)
             {
-                
                 focus_component(component);
                 switch (component->type)
                 {
