@@ -90,8 +90,8 @@ void update_input()
             Component *component = get_component_by_position(y, x);
             if (component != NULL)
             {
+                
                 focus_component(component);
-                // debug_component(screen.focus);
                 switch (component->type)
                 {
                 case INPUT_FIELD:
@@ -136,6 +136,29 @@ void update_input()
                         }
                     }
 
+                    break;
+                }
+                case PAGER:
+                {
+                    Component *page = component->parent;
+                    Page_data *page_data = (Page_data *)page->data;
+                    int abs_x = x - component->abs_x;
+                    
+                    if (abs_x >= 0 && abs_x < component->width) {
+
+                        if(abs_x >= 0 && abs_x < 2){
+                            
+                            page_to(page, page_data->current_page - 1);
+                        }
+                        else if(abs_x >= component->width - 2 && abs_x < component->width){
+                            /*printf("[debug] to page %d\n", page_data->current_page + 1);
+                            system("pause");*/
+
+                            page_to(page, page_data->current_page + 1);
+                        }
+                    }
+                   
+                    
                     break;
                 }
                 }

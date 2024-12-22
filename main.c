@@ -165,16 +165,32 @@ void test_bar(Component* root){
 
 void test_page(Component* root){
     clear();
-    Component* box = create_box(0, 0, 50, 16, root);
+    Component* box = create_box(0, 0, 50, 20, root);
     Component* page = create_page(3, 3, 25, 10, box);
     
     Component* sub_page = create_sub_page(0, 0, page);
     create_text(1, 1, "子頁1", sub_page);
+    Component* checkbox = create_checkbox(1, 3, 10, "選項1", sub_page);
+    Component* checkbox2 = create_checkbox(1, 4, 10, "選項2", sub_page);
+    Component* checkbox3 = create_checkbox(1, 5, 10, "選項3", sub_page);
+    Component* button = create_button(1, 7, 10, " 確定", sub_page);
+    Component* text = create_text(1, 11, "", sub_page);
+
+    
     Component* sub_page2 = create_sub_page(0, 0, page);
     create_text(1, 1, "子頁2", sub_page2);
-    create_pager(3, 13, 25, 3, page);
+    create_text(1, 3, "輸入1:", sub_page2);
+    Component* input = create_input_field(7, 3, 15, sub_page2);
+    create_text(1, 5, "輸入2:", sub_page2);
+    Component* input2 = create_password_field(7, 5, 15, sub_page2);
+    
 
-    //page_to(page, 1);
+
+
+    create_pager(3, 12, 10, page);
+    
+
+
     redraw_all_components();
     while(1){
         update();

@@ -20,8 +20,6 @@ void debug_component(Component *component)
     printf("[debug] level = %d\n", component->level);
     printf("[debug] number = %d\n", component->number);
     printf("[debug] type = %d\n", component->type);
-    printf("[debug] parent = %p\n", component->parent);
-    printf("[debug] children = %p\n", component->children);
     printf("[debug] =====================================\n");
 }
 
@@ -314,7 +312,7 @@ Component* create_sub_page(int x, int y, Component* parent){
 }
 
 // 加完子頁再加分頁器
-Component* create_pager(int x, int y, int width, int height, Component* parent){
+Component* create_pager(int x, int y, int width, Component* parent){
     if(parent->type != PAGE){
         printf("parent is not a page\n");
         system("pause");
@@ -336,9 +334,8 @@ Component* create_pager(int x, int y, int width, int height, Component* parent){
     parent->children_size = 2;
     ((Page_data*)parent->data)->current_page = 0;
     parent->children[0] = ((Page_data*)parent->data)->sub_pages[0];
-    
+    pager->height = 1;
     pager->width = width;
-    pager->height = height;
     pager->type = PAGER;
     pager->draw = draw_pager;
 
@@ -415,8 +412,11 @@ void page_to(Component* page, int index){
     }
     page_data->current_page = index;
     page->children[0] = page_data->sub_pages[index];
-    update_screen_component();
-    page->draw(page);
+    clear_buffer();
+    clear_format_buffer();
+    redraw_all_components();
+
+    
 }
 
 
@@ -568,10 +568,28 @@ void draw_sub_page(Component *sub_page)
     (void)sub_page;
 }
 
-void draw_pager(Component *pager)
-{
-    (void)pager;
+
+void draw_pager(Component* pager){
+    int level = pager->level;
+    Page_data* page_data = (Page_data*)pager->parent->data;
+    int current_page = page_data->current_page;
+    int sub_page_count = page_data->sub_page_count;
+    int width = pager->width;
+
+    int x = pager->abs_x;
+    int y = pager->abs_y;
+    set_buffer(y, x, level, "◀");
+    set_buffer(y, x + width - 1, level, "▶");
+    char temp[100];
+    sprintf(temp, "%d/%d", current_page + 1, sub_page_count);
+    draw_string(x + (width / 2) - 2, y, level, temp, width - 4, DEFAULT_FORMAT);
+
+
+
 }
+
+
+
 
 void draw_dropdown_menu(Component *dropdown_menu)
 {

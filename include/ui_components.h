@@ -132,7 +132,7 @@ Component* create_dropdown_menu(int x, int y, int width,char* default_text, Comp
 Component* create_bar(int x, int y, int width, Component* parent);
 Component* create_page(int x, int y, int width, int height, Component* parent);
 Component* create_sub_page(int x, int y, Component* parent);
-Component* create_pager(int x, int y, int width, int height, Component* parent);
+Component* create_pager(int x, int y, int width, Component* parent);
 
 
 void set_component_format(Component* component, int format);
