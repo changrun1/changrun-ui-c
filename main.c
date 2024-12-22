@@ -198,7 +198,7 @@ void test_page(Component* root){
     
 }
 
-//testgit remote add origin <repository-url>
+
 int main(){
     
     Component* root = init();
