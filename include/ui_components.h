@@ -138,6 +138,7 @@ Component* create_pager(int x, int y, int width, Component* parent);
 void set_component_format(Component* component, int format);
 void set_text(Component* textComponent, char* text);
 void set_corner(Component* component, int round_corner);
+void set_input_field_type(Component* input_field, Input_type type);
 void add_radio_button(Component* radio_button, char* text);
 void add_dropdown_menu(Component* dropdown_menu, char* text);
 void page_to(Component* page, int index);

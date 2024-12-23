@@ -402,6 +402,16 @@ void set_corner(Component *component, int round_corner)
 
 }
 
+void set_input_field_type(Component *input_field, Input_type type)
+{
+    if (input_field->type != INPUT_FIELD && input_field->type != PASSWORD_FIELD)
+    {
+        return;
+    }
+    ((Text_input_data *)input_field->data)->type = type;
+    update_screen_component();
+}
+
 void page_to(Component* page, int index){
     if(page->type != PAGE){
         return;
